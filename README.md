@@ -2,6 +2,8 @@
 
 A conversational coding assistant plugin for OpenCode with semantic code search.
 
+**This project is not led by Opencode Developers. If you encounter any problems, file an issue here.** 
+
 ## What It Does
 
 **Chatifier** transforms OpenCode into a more conversational experience with two specialized agents and local semantic search.
