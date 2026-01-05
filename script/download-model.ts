@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 /**
  * Download embedding model for semantic search.
- * Usage: npx @howaboua/opencode-chat opencode-chat-download-model
- * Automatically finds repo root by walking up to .opencode/
+ * Usage: bunx --bun @howaboua/opencode-chat opencode-chat-download-model
+ * Run from your project root directory.
  */
 import * as path from "path"
 import * as fs from "fs/promises"
@@ -10,22 +10,8 @@ import { EmbeddingModel, ExecutionProvider, FlagEmbedding } from "fastembed"
 
 const MODEL_DIRNAME = "models"
 
-async function findRepoRoot(start: string): Promise<string> {
-  let dir = start
-  while (dir !== "/") {
-    const opencodePath = path.join(dir, ".opencode")
-    const exists = await fs
-      .stat(opencodePath)
-      .then((s) => s.isDirectory())
-      .catch(() => false)
-    if (exists) return dir
-    dir = path.dirname(dir)
-  }
-  return start
-}
-
 async function main() {
-  const worktree = await findRepoRoot(path.resolve(process.cwd()))
+  const worktree = path.resolve(process.cwd())
   const cacheDir = path.join(worktree, ".opencode", "chat", MODEL_DIRNAME)
 
   console.log(`[model] worktree: ${worktree}`)

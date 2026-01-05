@@ -1,26 +1,11 @@
 #!/usr/bin/env bun
 /**
  * Manual semantic indexer.
- * Usage: npx @howaboua/opencode-chat opencode-chat-semantic-index --mode changed|full
- * Automatically finds repo root by walking up to .opencode/
+ * Usage: bunx --bun @howaboua/opencode-chat opencode-chat-semantic-index --mode changed|full
+ * Run from your project root directory.
  */
 import * as path from "path"
-import * as fs from "fs/promises"
 import { ensureSemanticIndex } from "../semantic/index.js"
-
-async function findRepoRoot(start: string): Promise<string> {
-  let dir = start
-  while (dir !== "/") {
-    const opencodePath = path.join(dir, ".opencode")
-    const exists = await fs
-      .stat(opencodePath)
-      .then((s) => s.isDirectory())
-      .catch(() => false)
-    if (exists) return dir
-    dir = path.dirname(dir)
-  }
-  return start
-}
 
 function parseMode(argv: string[]) {
   const idx = argv.indexOf("--mode")
@@ -49,7 +34,7 @@ function formatProgress(progress: {
 
 async function main() {
   const mode = parseMode(process.argv)
-  const worktree = await findRepoRoot(path.resolve(process.cwd()))
+  const worktree = path.resolve(process.cwd())
   console.log(`[semantic] worktree: ${worktree}`)
   let lastShown = ""
 
