@@ -1,6 +1,7 @@
+#!/usr/bin/env node
 /**
  * Manual semantic indexer.
- * Usage: bun script/semantic-index.ts --mode changed|full
+ * Usage: npx @howaboua/opencode-chat opencode-chat-semantic-index --mode changed|full
  * Automatically finds repo root by walking up to .opencode/
  */
 import * as path from "path"

@@ -1,6 +1,7 @@
+#!/usr/bin/env node
 /**
  * Download embedding model for semantic search.
- * Usage: bun script/download-model.ts
+ * Usage: npx @howaboua/opencode-chat opencode-chat-download-model
  * Automatically finds repo root by walking up to .opencode/
  */
 import * as path from "path"
